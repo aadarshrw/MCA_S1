@@ -40,7 +40,9 @@ int main()
 		scanf("%d",&b[i]);
 	}
 	sort(a,m);
+	display(a,m);
 	sort(b,n);
+	display(b,n);
 	for(i=0;i<m;i++)
 	{
 		c[i] = a[i];
