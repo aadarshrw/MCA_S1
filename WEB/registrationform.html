@@ -1,0 +1,152 @@
+<html>
+    <head>
+        <title>Admission | Form</title>
+        <script>
+            function validate()
+            {
+                var x = document.forms["myform"]["Name"].value;
+                var y = document.forms["myform"]["Guardian"].value;
+                var z = document.forms["myform"]["DOB"].value;
+                var a = document.forms["myform"]["Address"].value;
+                if(x == "")
+                {
+                    alert("Name must not be empty!!!");
+                }
+                else if(y == "")
+                {
+                    alert("Guardian name must not be empty!!!");
+                }
+                else if(z == "")
+                {
+                    alert("Please select a DOB!!");
+                }
+                else if(a == "")
+                {
+                    alert("Please enter an Address!!");
+                }
+            }
+        </script>
+        <style>
+            body
+            {
+                background-color: #F0F0F0;
+                font-family: sans-serif;
+            }
+            input[type="text"],[type="number"]
+            {
+                width: 260px;
+                height: 40px;
+                background-color: #F0F0F0;
+                border: none;
+                border-radius: 10px;
+            }
+            textarea
+            {
+                background-color: #F0F0F0;
+                border: none;
+                border-radius: 10px;
+            }
+            label
+            {
+                font-weight: bold;
+            }
+            input[type="date"]
+            {
+                background-color: #F0F0F0;
+                border: none;
+                width: 150px;
+                height: 40px;
+                border-radius: 10px;
+            }
+            select
+            {
+                background-color: #F0F0F0;
+                border: none;
+                width: 150px;
+                height: 40px;
+                border-radius: 10px;
+            }
+            div
+            {
+                padding: 20px;
+                position: absolute;
+                top: 13%;
+                left: 25%;
+                width: 47%;
+                height: 69%;
+                background-color: white;
+                border-radius: 10px;
+            }
+            input[type="submit"],[type="reset"]
+            {
+                width: 110px;
+                height: 35px;
+                background-color: grey;
+                border: none;
+                border-radius: 10px;
+            }
+            h1
+            {
+                font-weight: bolder;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>ADMISSION FORM</h1>
+        <div>
+        <form name="myform">
+        <table>
+            <tr>
+                <td><label for="Course">Course:</label></td>
+                <td><select name="Course">
+                    <option value="BA">BA</option>
+                    <option value="BSc">BSc</option>
+                    <option value="BCA">BCA</option>
+                </select></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="Name">Name:</label></td>
+                <td><input type="text" name="Name"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="Gender">Gender:</label></td>
+                <td><input type="radio" name="Gender">Male&nbsp;<input type="radio" name="Gender">Female&nbsp;<input type="radio" name="Gender">Other</td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="DOB">DOB:</label></td>
+                <td><input type="date" name="DOB"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="Address">Address:</label></td>
+                <td><textarea name="Address" cols="32" rows="7"></textarea></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="Phone">Phone:</label></td>
+                <td><input type="number" name="Phone"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="Guardian">Guardian:</label></td>
+                <td><input type="text" name="Guardian"></td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td><label for="Hobbies">Hobbies:</label></td>
+                <td><input type="checkbox" name="Hobbies">Art&nbsp;<input type="checkbox" name="Hobbies">Music&nbsp;<input type="checkbox" name="Hobbies">Dance&nbsp;<input type="checkbox" name="Hobbies">Gaming&nbsp;</td>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+            <tr>
+                <td><input type="submit" onclick="validate()"></td>
+                <td><input type="reset" value="Clear"></td>
+            </tr>
+        </table>
+        </form>
+        </div>
+    </body>
+</html>
