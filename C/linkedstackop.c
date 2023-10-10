@@ -22,7 +22,7 @@ int main()
     while (1)
     {
         printf("\n\tLINKED STACK MENU\n1.Push\n2.Pop\n3.Search\n4.display\n99.exit");
-        printf("\nenter your choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &ch);
         switch (ch)
         {
