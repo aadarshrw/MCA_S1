@@ -24,7 +24,7 @@ int main()
     while (1)
     {
         printf("\n\tMENU\n1.Create\n2.Insert begining\n3.Insert Position\n4.delete Position\n5.Search\n6.display\n99.exit");
-        printf("\nenter your choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &ch);
         switch (ch)
         {
