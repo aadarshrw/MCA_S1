@@ -6,7 +6,7 @@ for _ in range(limit):
 for num in l1:
     if num not in l2:
         l2.append(num)
-print("The list without duplicate elemts is: ",l2)
+print("The list without duplicate elements is: ",l2)
         
 
 
