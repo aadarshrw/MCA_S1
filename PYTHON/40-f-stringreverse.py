@@ -1,4 +1,4 @@
-"""reverse a string"""
+
 def rev(str):
     if len(str)==0:
         return ""
