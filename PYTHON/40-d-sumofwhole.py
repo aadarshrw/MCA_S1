@@ -1,4 +1,3 @@
-"""sum of whole numbers up to a limit"""
 def sum(n):
     if n==0:
         return 0
