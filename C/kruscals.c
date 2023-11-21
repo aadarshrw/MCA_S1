@@ -10,7 +10,7 @@ int comparator(const void* p1, const void* p2)
 void makeSet(int parent[], int rank[], int n) 
 { 
 	for (int i = 0; i < n; i++) 
-    { 
+    	{ 
 		parent[i] = i; 
 		rank[i] = 0; 
 	} 
@@ -18,9 +18,9 @@ void makeSet(int parent[], int rank[], int n)
 int findParent(int parent[], int component) 
 { 
 	if(parent[component] == component)
-    { 
+    	{ 
 		return component;
-    } 
+    	} 
 	return parent[component] = findParent(parent, parent[component]); 
 }
 void unionSet(int u, int v, int parent[], int rank[], int n) 
@@ -28,15 +28,15 @@ void unionSet(int u, int v, int parent[], int rank[], int n)
 	u = findParent(parent, u); 
 	v = findParent(parent, v); 
 	if(rank[u] < rank[v]) 
-    { 
+    	{ 
 		parent[u] = v; 
 	} 
 	else if(rank[u] > rank[v]) 
-    { 
+    	{ 
 		parent[v] = u; 
 	} 
 	else 
-    { 
+    	{ 
 		parent[v] = u; 
 		rank[u]++; 
 	} 
@@ -50,12 +50,12 @@ void kruskalAlgo(int n, int edge[n][3])
 	int minCost = 0; 
 	printf( "Following are the edges in the constructed MST\n"); 
 	for (int i = 0; i < n; i++) 
-    { 
+    	{ 
 		int v1 = findParent(parent, edge[i][0]); 
 		int v2 = findParent(parent, edge[i][1]); 
 		int wt = edge[i][2]; 
 		if (v1 != v2) 
-        { 
+        	{ 
 			unionSet(v1, v2, parent, rank, n); 
 			minCost += wt; 
 			printf("%d -- %d == %d\n", edge[i][0], 
