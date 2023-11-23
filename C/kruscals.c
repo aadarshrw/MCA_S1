@@ -62,15 +62,15 @@ void kruskalAlgo(int n, int edge[n][3])
 			edge[i][1], wt); 
 		} 
 	} 
-    printf("Minimum Cost Spanning Tree: %d\n", minCost); 
+	printf("Minimum Cost Spanning Tree: %d\n", minCost); 
 } 
 int main() 
 { 
 	int edge[5][3]={{ 0, 1, 10 }, 
-					{ 0, 2, 6 }, 
-					{ 0, 3, 5 }, 
-					{ 1, 3, 15 }, 
-					{ 2, 3, 4 }}; 
+			{ 0, 2, 6 }, 
+			{ 0, 3, 5 }, 
+			{ 1, 3, 15 }, 
+			{ 2, 3, 4 }}; 
 	kruskalAlgo(5, edge); 
 	return 0; 
 }
