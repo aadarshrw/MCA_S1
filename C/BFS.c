@@ -15,9 +15,9 @@ Graph* Graph_create(int V)
 	Graph* g = malloc(sizeof(Graph));
 	g->V = V;
 	for (int i = 0; i < V; i++) 
-    {
+    	{
 		for (int j = 0; j < V; j++) 
-        {
+        	{
 			g->adj[i][j] = false;
 		}
 	}
@@ -26,7 +26,7 @@ Graph* Graph_create(int V)
 
 void Graph_destroy(Graph* g)
 {
-    free(g); 
+	free(g); 
 }
 
 void Graph_addEdge(Graph* g, int v, int w)
@@ -38,7 +38,7 @@ void Graph_BFS(Graph* g, int s)
 {
 	bool visited[MAX_VERTICES];
 	for (int i = 0; i < g->V; i++) 
-    {
+    	{
 		visited[i] = false;
 	}
 	int queue[MAX_VERTICES];
@@ -46,13 +46,13 @@ void Graph_BFS(Graph* g, int s)
 	visited[s] = true;
 	queue[rear++] = s;
 	while (front != rear) 
-    {
+    	{
 		s = queue[front++];
 		printf("%d ", s);
 		for (int adjacent = 0; adjacent < g->V; adjacent++) 
-        {
+        	{
 			if (g->adj[s][adjacent] && !visited[adjacent]) 
-            {
+            		{
 				visited[adjacent] = true;
 				queue[rear++] = adjacent;
 			}
