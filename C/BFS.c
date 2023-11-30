@@ -69,8 +69,7 @@ int main()
 	Graph_addEdge(g, 2, 0);
 	Graph_addEdge(g, 2, 3);
 	Graph_addEdge(g, 3, 3);
-	printf("Following is Breadth First Traversal "
-		"(starting from vertex 2) \n");
+	printf("Following is Breadth First Traversal(starting from vertex 2) \n");
 	Graph_BFS(g, 2);
 	Graph_destroy(g);
 	return 0;
