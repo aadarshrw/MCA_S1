@@ -17,17 +17,18 @@ int main()
 	printf("Total no of vertices :: ");
 	scanf("%d",&n);
 	for(i=1;i<=n;i++)
-		 visited[i]=0;
+	{
+		visited[i]=0;
+	}
 	printf("\nenter the adjacency matrix!\n");
 	for(i=1;i<=n;i++)
 	{
 		for(j=1;j<=n;j++)
 		{
-				scanf("%d",&adj[i][j]);
+			scanf("%d",&adj[i][j]);
 		}
 	}
 	printf("spanning tree edges are:\n");
-	//printf("\nselect a starting vertex from 1 to  %d:",n);
 	insert(1);
 	for(i=1;i<=n;i++)
 	{
@@ -44,5 +45,5 @@ int main()
 		}
 	}
 	printf("\n");
-return 0;
+	return 0;
 }
