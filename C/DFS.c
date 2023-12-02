@@ -27,7 +27,6 @@ int main()
 		}
 	}
 	printf("spanning tree edges are:\n");
-	//printf("\nselect a starting vertex from 1 to  %d:",n);
 	push(1);
 	for(i=1;i<=n;i++)
 	{
@@ -42,13 +41,6 @@ int main()
 				push(j);
 			}
 		}	
-	
-	/*for(k=1;k<=top;k++)
-	{
-	printf("%d-->",s[k]);
 	}
-	printf("\n");*/
-	}
-	
-return 0;
+	return 0;
 }
