@@ -20,12 +20,11 @@ int main()
 {
     printf("Total no of vertices :: ");
     scanf("%d", &n);
-    
     for (i = 1; i <= n; i++)
+    {
         visited[i] = 0;
-    
+    }
     printf("\nEnter the adjacency matrix!\n");
-    
     for (i = 1; i <= n; i++) 
     {
         for (j = 1; j <= n; j++) 
@@ -33,16 +32,13 @@ int main()
             scanf("%d", &adj[i][j]);
         }
     }
-    
     printf("Spanning tree edges are:\n");
     push(1);
-    
     while (top != 0) 
     {
         item = pop();
         printf("%d-->", item);
         visited[item] = 1;
-        
         for (j = 1; j <= n; j++) 
 	{
             if (adj[item][j] == 1 && !visited[j]) 
@@ -52,6 +48,5 @@ int main()
             }
         }
     }
-    
     return 0;
 }
