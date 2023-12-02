@@ -1,76 +1,48 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#define MAX_VERTICES 50
-
-typedef struct Graph_t 
+#include<stdio.h>
+#include<stdlib.h>
+int q[10],visited[10],i,j,n,adj[10][10],front=1,rear=0,v,item;
+void insert(int v)
 {
-	int V;
-	bool adj[MAX_VERTICES][MAX_VERTICES];
-} Graph;
-
-Graph* Graph_create(int V)
+	rear++;
+	q[rear]=v;
+}
+int get()
 {
-	Graph* g = malloc(sizeof(Graph));
-	g->V = V;
-	for (int i = 0; i < V; i++) 
-    	{
-		for (int j = 0; j < V; j++) 
-        	{
-			g->adj[i][j] = false;
+	v= q[front];
+	front++;
+	return v;
+}
+int main()
+{
+	printf("Total no of vertices :: ");
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+		 visited[i]=0;
+	printf("\nenter the adjacency matrix!\n");
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+				scanf("%d",&adj[i][j]);
 		}
 	}
-	return g;
-}
-
-void Graph_destroy(Graph* g)
-{
-	free(g); 
-}
-
-void Graph_addEdge(Graph* g, int v, int w)
-{
-	g->adj[v][w] = true;
-}
-
-void Graph_BFS(Graph* g, int s)
-{
-	bool visited[MAX_VERTICES];
-	for (int i = 0; i < g->V; i++) 
-    	{
-		visited[i] = false;
-	}
-	int queue[MAX_VERTICES];
-	int front = 0, rear = 0;
-	visited[s] = true;
-	queue[rear++] = s;
-	while (front != rear) 
-    	{
-		s = queue[front++];
-		printf("%d ", s);
-		for (int adjacent = 0; adjacent < g->V; adjacent++) 
-        	{
-			if (g->adj[s][adjacent] && !visited[adjacent]) 
-            		{
-				visited[adjacent] = true;
-				queue[rear++] = adjacent;
+	printf("spanning tree edges are:\n");
+	//printf("\nselect a starting vertex from 1 to  %d:",n);
+	insert(1);
+	for(i=1;i<=n;i++)
+	{
+		item=get();
+		visited[item]=1;
+		for(j=i+1;j<=n;j++)
+		{
+			if(adj[item][j]==1 && visited[j]==0)
+			{
+				visited[j]=1;
+				insert(j);
+				printf("edge(%d,%d)\n",item,j);
 			}
 		}
 	}
-}
-
-int main()
-{
-	Graph* g = Graph_create(4);
-	Graph_addEdge(g, 0, 1);
-	Graph_addEdge(g, 0, 2);
-	Graph_addEdge(g, 1, 2);
-	Graph_addEdge(g, 2, 0);
-	Graph_addEdge(g, 2, 3);
-	Graph_addEdge(g, 3, 3);
-	printf("Following is Breadth First Traversal(starting from vertex 2) \n");
-	Graph_BFS(g, 2);
-	Graph_destroy(g);
-	return 0;
+	printf("\n");
+return 0;
 }
