@@ -1,67 +1,54 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Graph 
+#include<stdio.h>
+#include<stdlib.h>
+int s[10],visited[10],i,j,n,adj[10][10],top=0,v,k,item;
+void push(int v)
 {
-    int numVertices;
-    struct Node** adjacencyList;
-};
-
-struct Node 
-{
-    int vertex;
-    struct Node* next;
-};
-
-void addEdge(struct Graph* graph, int src, int dest) 
-{
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->vertex = dest;
-    newNode->next = graph->adjacencyList[src];
-    graph->adjacencyList[src] = newNode;
+	top++;
+	s[top]=v;
 }
-
-void DFS(struct Graph* graph, int v, int* visited) 
+int pop()
 {
-    visited[v] = 1;
-    printf("%d ", v);
-    struct Node* temp;
-    for (temp = graph->adjacencyList[v]; temp != NULL; temp = temp->next) 
-    {
-        if (!visited[temp->vertex]) 
-        {
-            DFS(graph, temp->vertex, visited);
-        }
-    }
+	v= s[top];
+	top--;
+	return v;
 }
-
-struct Graph* createGraph(int numVertices) 
+int main()
 {
-    struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
-    graph->numVertices = numVertices;
-    graph->adjacencyList = (struct Node**)malloc(sizeof(struct Node*) * numVertices);
-    for (int i = 0; i < numVertices; i++) 
-    {
-        graph->adjacencyList[i] = NULL;
-    }
-    return graph;
-}
-
-int main() 
-{
-    struct Graph* graph = createGraph(4);
-    addEdge(graph, 0, 1);
-    addEdge(graph, 0, 2);
-    addEdge(graph, 1, 2);
-    addEdge(graph, 2, 0);
-    addEdge(graph, 2, 3);
-    addEdge(graph, 3, 3);
-    int visited[4];
-    for (int i = 0; i < 4; i++) 
-    {
-        visited[i] = 0;
-    }
-    printf("\nFollowing is Depth First Traversal(starting from vertex 2) \n");
-    DFS(graph, 2, visited);
-    return 0;
+	printf("Total no of vertices :: ");
+	scanf("%d",&n);
+	for(i=1;i<=n;i++)
+		 visited[i]=0;
+	printf("\nenter the adjacency matrix!\n");
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+				scanf("%d",&adj[i][j]);
+		}
+	}
+	printf("spanning tree edges are:\n");
+	//printf("\nselect a starting vertex from 1 to  %d:",n);
+	push(1);
+	for(i=1;i<=n;i++)
+	{
+		item=pop();
+		printf("%d-->",item);
+		visited[item]=1;
+		for(j=i+1;j<=n;j++)
+		{
+			if(adj[item][j]==1 && visited[j]==0)
+			{
+				visited[j]=1;
+				push(j);
+			}
+		}	
+	
+	/*for(k=1;k<=top;k++)
+	{
+	printf("%d-->",s[k]);
+	}
+	printf("\n");*/
+	}
+	
+return 0;
 }
