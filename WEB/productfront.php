@@ -2,6 +2,26 @@
     <head>
         <title>Product Details</title>
         <style>
+            body
+            {
+                font-family: sans-serif;
+            }
+            a
+            {
+                position: absolute;
+                top: 45%;
+                left: 60%;
+                text-decoration: none;
+                color: black;
+            }
+            a:hover
+            {
+                position: absolute;
+                top: 45%;
+                left: 60%;
+                text-decoration: none;
+                color: grey;
+            }
             div
             {
                 padding: 30px;
@@ -54,5 +74,6 @@
                 <input type="submit" value="Submit"><br><br>
                 <input type="reset" value="clear">
             </div>
+            <a href="createtableprod.php">First time here?<br>Click here to create the product table</a>
         </form>
     </body>
