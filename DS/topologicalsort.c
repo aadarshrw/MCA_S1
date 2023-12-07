@@ -1,102 +1,128 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-struct Node 
+struct Stack
 {
     int data;
-    struct Node* next;
+    struct Stack *next;
 };
 
-struct Graph 
+struct List
+{
+    int data;
+    struct List *next;
+};
+
+struct Graph
 {
     int V;
-    struct Node** adjList;
+    struct List *adj;
 };
 
-struct Node* createNode(int data) 
+struct Stack *createStackNode(int data)
 {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    struct Stack *newNode = (struct Stack *)malloc(sizeof(struct Stack));
     newNode->data = data;
     newNode->next = NULL;
     return newNode;
 }
 
-struct Graph* createGraph(int V) 
+struct List *createListNode(int data)
 {
-    struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+    struct List *newNode = (struct List *)malloc(sizeof(struct List));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Graph *createGraph(int V)
+{
+    struct Graph *graph = (struct Graph *)malloc(sizeof(struct Graph));
     graph->V = V;
-    graph->adjList = (struct Node**)malloc(V * sizeof(struct Node*));
+    graph->adj = (struct List *)malloc(V * sizeof(struct List));
     for (int i = 0; i < V; ++i)
     {
-        graph->adjList[i] = NULL;
+        graph->adj[i].next = NULL;
     }
     return graph;
 }
 
-void addEdge(struct Graph* graph, int src, int dest) 
+void addEdge(struct Graph *graph, int v, int w)
 {
-    struct Node* newNode = createNode(dest);
-    newNode->next = graph->adjList[src];
-    graph->adjList[src] = newNode;
+    struct List *newNode = createListNode(w);
+    newNode->next = graph->adj[v].next;
+    graph->adj[v].next = newNode;
 }
 
-void topologicalSortUtil(int v, struct Graph* graph, int visited[], struct Node** stack) 
+void topologicalSortUtil(struct Graph *graph, int v, bool visited[], struct Stack **stack)
 {
-    visited[v] = 1;
-    struct Node* temp = graph->adjList[v];
-    while (temp != NULL) 
+    visited[v] = true;
+    struct List *current = graph->adj[v].next;
+    while (current != NULL)
     {
-        int adjVertex = temp->data;
-        if (!visited[adjVertex]) 
+        int adjacentVertex = current->data;
+        if (!visited[adjacentVertex])
         {
-            topologicalSortUtil(adjVertex, graph, visited, stack);
+            topologicalSortUtil(graph, adjacentVertex, visited, stack);
         }
-        temp = temp->next;
+        current = current->next;
     }
-    *stack = createNode(v);
-    (*stack)->next = temp;
+    struct Stack *newNode = createStackNode(v);
+    newNode->next = *stack;
+    *stack = newNode;
 }
 
-void topologicalSort(struct Graph* graph) 
+void topologicalSort(struct Graph *graph)
 {
-    int* visited = (int*)malloc(graph->V * sizeof(int));
+    struct Stack *stack = NULL;
+    bool *visited = (bool *)malloc(graph->V * sizeof(bool));
     for (int i = 0; i < graph->V; ++i)
     {
-        visited[i] = 0;
+        visited[i] = false;
     }
-    struct Node* stack = NULL;
-    for (int i = 0; i < graph->V; ++i) 
+    for (int i = 0; i < graph->V; ++i)
     {
-        if (!visited[i]) 
+        if (!visited[i])
         {
-            topologicalSortUtil(i, graph, visited, &stack);
+            topologicalSortUtil(graph, i, visited, &stack);
         }
     }
-    printf("Topological Order: ");
-    while (stack != NULL) 
+    printf("Topological Sorting Order: ");
+    while (stack != NULL)
     {
         printf("%d ", stack->data);
-        struct Node* temp = stack;
+        struct Stack *temp = stack;
         stack = stack->next;
         free(temp);
     }
     free(visited);
+    free(graph->adj);
+    free(graph);
 }
-int main() 
+
+int main()
 {
-    int V, E;
+    int vertices, edges;
+
     printf("Enter the number of vertices: ");
-    scanf("%d", &V);
-    struct Graph* graph = createGraph(V);
+    scanf("%d", &vertices);
+
     printf("Enter the number of edges: ");
-    scanf("%d", &E);
-    printf("Enter the edges (source destination):\n");
-    for (int i = 0; i < E; ++i) 
+    scanf("%d", &edges);
+
+    struct Graph *g = createGraph(vertices);
+
+    printf("Enter the edges (format: source destination):\n");
+    for (int i = 0; i < edges; ++i)
     {
-        int src, dest;
-        scanf("%d %d", &src, &dest);
-        addEdge(graph, src, dest);
+        int source, destination;
+        scanf("%d %d", &source, &destination);
+        addEdge(g, source, destination);
     }
-    topologicalSort(graph);
+
+    printf("Topological Sorting Order: ");
+    topologicalSort(g);
+
     return 0;
 }
